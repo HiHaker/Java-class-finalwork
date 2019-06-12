@@ -10,9 +10,10 @@ import java.util.List;
  */
 public interface StudentService {
     void addStudent(Student s);
-    void deleteStudent(String name);
+    void deleteStudent(Integer sid);
     void updateStudent(Student s);
     List<Student> findAllStudents();
     Student findStudentByName(String name);
+    Student findStudentByID(Integer sid);
     List<Student> findStudentsBySex(Integer sex);
 }

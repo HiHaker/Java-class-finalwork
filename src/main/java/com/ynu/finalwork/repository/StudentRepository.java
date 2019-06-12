@@ -12,6 +12,5 @@ import java.util.List;
  */
 public interface StudentRepository extends JpaRepository<Student, Integer> {
     Student findByName(String name);
-    void deleteByName(String name);
     List<Student> findBySex(Integer sex);
 }

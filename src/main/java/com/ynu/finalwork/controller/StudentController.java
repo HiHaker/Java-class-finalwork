@@ -25,7 +25,7 @@ public class StudentController {
     @PostMapping("/addStudent")
     public Object addStudent(Student s){
         jsonObject = new JSONObject();
-        Student base = studentService.findStudentByName(s.getName());
+        Student base = studentService.findStudentByID(s.getSid());
         if (base == null){
             studentService.addStudent(s);
             jsonObject.put("student",s);
@@ -37,13 +37,13 @@ public class StudentController {
 
     // 删除学生
     @DeleteMapping("/deleteStudent")
-    public Object deleteStudent(@RequestParam("name") String name){
+    public Object deleteStudent(@RequestParam("sid") Integer sid){
         jsonObject = new JSONObject();
-        Student base = studentService.findStudentByName(name);
+        Student base = studentService.findStudentByID(sid);
         if (base == null){
             jsonObject.put("message","删除失败,学生不存在!");
         }else{
-            studentService.deleteStudent(name);
+            studentService.deleteStudent(sid);
             jsonObject.put("student",base);
         }
         return jsonObject;
@@ -51,14 +51,12 @@ public class StudentController {
 
     // 修改学生
     @PostMapping("/updateStudent")
-    public Object updateStudent(@RequestParam("nameBefore") String name, Student s){
+    public Object updateStudent(Student s){
         jsonObject = new JSONObject();
-        System.out.println(name);
-        Student base = studentService.findStudentByName(name);
+        Student base = studentService.findStudentByID(s.getSid());
         if (base == null){
             jsonObject.put("message","更新失败,学生不存在!");
         }else{
-            s.setSid(base.getSid());
             studentService.updateStudent(s);
             jsonObject.put("student",s);
         }

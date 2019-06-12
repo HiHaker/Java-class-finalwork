@@ -21,8 +21,8 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public void deleteStudent(String name) {
-        studentRepository.deleteByName(name);
+    public void deleteStudent(Integer sid) {
+        studentRepository.deleteById(sid);
     }
 
     @Override
@@ -38,6 +38,11 @@ public class StudentServiceImpl implements StudentService{
     @Override
     public Student findStudentByName(String name) {
         return studentRepository.findByName(name);
+    }
+
+    @Override
+    public Student findStudentByID(Integer sid) {
+        return studentRepository.findById(sid).orElse(null);
     }
 
     @Override

@@ -3,39 +3,29 @@ package com.ynu.finalwork.entity;
 import javax.persistence.*;
 
 /**
- * Created on 2019/6/12 0012
- * BY hujianlong
+ *create by fukaimi
+ * 2019/6/12
  */
+
 @Entity
-@Table(name="student")
-public class Student {
+@Table(name="teacher")
+public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer sid;
-    @Column
-    private String name;
-    @Column
+    private Integer tid;
+
+    private String  name;
+
     private Integer sex;
-    @Column
+
     private String telephone;
 
-    public Student(){
-
+    public Integer getTid() {
+        return tid;
     }
 
-    public Student(Integer sid, String name, Integer sex, String telephone){
-        this.sid = sid;
-        this.name = name;
-        this.sex = sex;
-        this.telephone = telephone;
-    }
-
-    public Integer getSid() {
-        return sid;
-    }
-
-    public void setSid(Integer sid) {
-        this.sid = sid;
+    public void setTid(Integer tid) {
+        this.tid = tid;
     }
 
     public String getName() {
@@ -60,5 +50,15 @@ public class Student {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "tid=" + tid +
+                ", name='" + name + '\'' +
+                ", sex=" + sex +
+                ", telephone='" + telephone + '\'' +
+                '}';
     }
 }
