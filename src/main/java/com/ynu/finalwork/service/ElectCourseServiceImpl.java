@@ -1,6 +1,7 @@
 package com.ynu.finalwork.service;
 
 import com.ynu.finalwork.entity.Course;
+import com.ynu.finalwork.entity.DoubleKey;
 import com.ynu.finalwork.entity.ElectCourse;
 import com.ynu.finalwork.entity.Student;
 import com.ynu.finalwork.repository.ElectCourseRepository;
@@ -25,7 +26,8 @@ public class ElectCourseServiceImpl implements ElectCourseService {
 
     @Override
     public void deleteRecord(Integer sid, Integer cid) {
-        electCourseRepository.deleteBySidAndCid(sid,cid);
+        DoubleKey doubleKey = new DoubleKey(sid,cid);
+        electCourseRepository.deleteById(doubleKey);
     }
 
     @Override

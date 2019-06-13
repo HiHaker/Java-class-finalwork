@@ -11,6 +11,15 @@ public class DoubleKey implements Serializable {
     private Integer sid;
     private Integer cid;
 
+    public DoubleKey(){
+
+    }
+
+    public DoubleKey(Integer sid, Integer cid){
+        this.sid = sid;
+        this.cid = cid;
+    }
+
     // getter 和 setter
 
     public Integer getSid() {

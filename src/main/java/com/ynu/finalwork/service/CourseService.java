@@ -11,6 +11,6 @@ public interface CourseService {
 
     public void addCourse(Course course);
     public void deleteCourse(Integer id);
-
     public Course findById(Integer id);
+
 }

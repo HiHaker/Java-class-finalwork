@@ -8,8 +8,7 @@ import com.ynu.finalwork.entity.Teacher;
  */
 
 public interface TeacherService {
-    public void addTeacher(Teacher teacher);
-    public void deleteTeacher(Integer id);
-
-    public Teacher findById(Integer id);
+    void addTeacher(Teacher teacher);
+    void deleteTeacher(Integer id);
+    Teacher findById(Integer id);
 }

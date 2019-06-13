@@ -7,6 +7,8 @@ import com.ynu.finalwork.repository.TeachRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TeachServiceImpl implements TeachService {
 
@@ -35,7 +37,7 @@ public class TeachServiceImpl implements TeachService {
     }
 
     @Override
-    public Course findCourseByTid(Integer tid) {
+    public List<Course> findCourseByTid(Integer tid) {
         return teachRepository.findByTid(tid);
     }
 }

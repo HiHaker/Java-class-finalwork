@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/teach")
 public class TeachController {
     @Autowired
-    private TeachRepository teachRepository;
-
-    @Autowired
     private TeachService teachService;
 
     JSONObject jsonObject;
@@ -26,7 +23,7 @@ public class TeachController {
         jsonObject = new JSONObject();
 //        若通过cid找到的教师存在，则不能加入
         if(teachService.findTeacherByCid(cid)!=null||teachService.findCourseByTid(tid)!= null){
-            jsonObject.put("message","安排失败已存在课程!");
+            jsonObject.put("message","安排失败,已存在课程!");
         }
         Teach teach = new Teach();
         teach.setTid(tid);

@@ -13,9 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class TeacherServiceImpl implements TeacherService {
     @Autowired
-    private TeacherService teacherService;
-
-    @Autowired
     private TeacherRepository teacherRepository;
 
     @Override
