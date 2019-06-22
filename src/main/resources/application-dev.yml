@@ -14,4 +14,4 @@ spring:
     show-sql: true
 
 data:
-  DEADLINE: 2019-06-14 23:59:59
+  DEADLINE: 2019-06-30 23:59:59

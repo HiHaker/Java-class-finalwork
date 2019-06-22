@@ -17,7 +17,16 @@ public class Course {
 
     private String  name;
 
-    private Integer credit;
+    private Double credit;
+
+    public Course(){
+
+    }
+
+    public Course(String name, Double credit) {
+        this.name = name;
+        this.credit = credit;
+    }
 
     public Integer getCid() {
         return cid;
@@ -35,11 +44,11 @@ public class Course {
         this.name = name;
     }
 
-    public Integer getCredit() {
+    public Double getCredit() {
         return credit;
     }
 
-    public void setCredit(Integer credit) {
+    public void setCredit(Double credit) {
         this.credit = credit;
     }
 

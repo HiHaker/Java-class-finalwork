@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ynu.finalwork.entity.Student;
 import com.ynu.finalwork.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,9 +24,10 @@ public class StudentController {
 
     // 增加学生
     @PostMapping("/addStudent")
+    @Transactional
     public Object addStudent(Student s){
         jsonObject = new JSONObject();
-        Student base = studentService.findStudentByID(s.getSid());
+        Student base = studentService.findStudentByNumber(s.getSnumber());
         if (base == null){
             studentService.addStudent(s);
             jsonObject.put("student",s);
@@ -37,6 +39,7 @@ public class StudentController {
 
     // 删除学生
     @DeleteMapping("/deleteStudent")
+    @Transactional
     public Object deleteStudent(@RequestParam("sid") Integer sid){
         jsonObject = new JSONObject();
         Student base = studentService.findStudentByID(sid);
@@ -51,14 +54,20 @@ public class StudentController {
 
     // 修改学生
     @PostMapping("/updateStudent")
-    public Object updateStudent(Student s){
+    @Transactional
+    public Object updateStudent(@RequestParam("sid") Integer id, Student s){
         jsonObject = new JSONObject();
-        Student base = studentService.findStudentByID(s.getSid());
+        Student base = studentService.findStudentByID(id);
         if (base == null){
             jsonObject.put("message","更新失败,学生不存在!");
         }else{
-            studentService.updateStudent(s);
-            jsonObject.put("student",s);
+            base.setName(s.getName());
+            base.setPassword(s.getPassword());
+            base.setSex(s.getSex());
+            base.setSnumber(s.getSnumber());
+            base.setTelephone(s.getTelephone());
+            studentService.updateStudent(base);
+            jsonObject.put("student",base);
         }
         return jsonObject;
     }

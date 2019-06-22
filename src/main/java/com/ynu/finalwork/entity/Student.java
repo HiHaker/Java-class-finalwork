@@ -33,6 +33,7 @@ public class Student {
         this.name = name;
         this.password = password;
         this.sex = sex;
+        // telephone可以为空，其他均不能为空
         this.telephone = telephone;
     }
 

@@ -9,6 +9,7 @@ import com.ynu.finalwork.service.CourseService;
 import com.ynu.finalwork.service.ElectCourseService;
 import com.ynu.finalwork.service.TeachService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,19 +26,24 @@ public class TeachController {
     JSONObject jsonObject;
     //新增和更新同理
     @PostMapping("/add")
+    @Transactional
     public Object teachAdd(Teach teach){
         jsonObject = new JSONObject();
 //        若通过cid找到的教师存在，则不能加入
-        if(teachService.findTeacherByCid(teach.getCid())!=null||teachService.findCourseByTid(teach.getTid())!= null){
+        if(teachService.findTeacherByCid(teach.getCid())!=null){
             jsonObject.put("message","安排失败,已存在课程!");
+        }else{
+            jsonObject.put("record",teach);
+            teachService.addTeach(teach);
         }
-        jsonObject.put("record",teach);
-        teachService.addTeach(teach);
         return jsonObject;
     }
+
     @DeleteMapping("/delete")
-    public void deleteRecord(Teach teach){
-        teachService.deleteTeach(teach.getTid(),teach.getCid());
+    @Transactional
+    public void deleteRecord(@RequestParam("tid") Integer tid,
+                             @RequestParam("cid") Integer cid){
+        teachService.deleteTeach(tid,cid);
     }
 
 }

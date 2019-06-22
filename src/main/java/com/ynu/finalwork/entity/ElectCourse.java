@@ -17,6 +17,16 @@ public class ElectCourse {
     private Integer cid;
     private Double grade;
 
+    public ElectCourse(){
+
+    }
+
+    public ElectCourse(Integer sid, Integer cid, Double grade) {
+        this.sid = sid;
+        this.cid = cid;
+        this.grade = grade;
+    }
+
     @Id
     public Integer getSid() {
         return sid;

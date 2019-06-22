@@ -4,6 +4,7 @@ import com.ynu.finalwork.entity.Course;
 import com.ynu.finalwork.repository.CourseRepository;
 import com.ynu.finalwork.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -20,54 +21,36 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    /**
-     *增加一门课程
-     * @param name
-     * @param credit
-     */
+    // 增加一门课程
     @PostMapping("/add")
-    public Course courseAdd(@RequestParam("name")String name,
-                            @RequestParam("credit")Integer credit){
-    Course course = new Course();
-    course.setName(name);
-    course.setCredit(credit);
-    return  courseRepository.save(course);
+    @Transactional
+    public Course courseAdd(Course course){
+        return  courseRepository.save(course);
     }
 
     /**
      * 查询一门课程
      * @id
      */
-    @GetMapping("/get/{id}")
-    public Course courseGet(@PathVariable("id") Integer id){
-        Course course = courseService.findById(id);
-        return course;
-
+    @GetMapping("/get")
+    public Course courseGet(@RequestParam("cid") Integer id){
+        return courseService.findById(id);
     }
 
-    /**
-     * 更新一门课程,通过cid需要更新的课程
-     * @param id
-     * @param name
-     * @param credit
-     * @return
-     */
-    @PutMapping("/update/{id}")
-    public Course courseUpdata(@PathVariable("id")Integer id,
-                               @RequestParam("name")String name,
-                               @RequestParam("credit")Integer credit){
-        Course course = courseService.findById(id);
-        course.setName(name);
-        course.setCredit(credit);
-        return courseRepository.save(course);
+    // 更新一门课程,通过cid需要更新的课程
+    @PutMapping("/update")
+    @Transactional
+    public Course courseUpdata(@RequestParam("cid") Integer id, Course course){
+        Course OldCourse = courseService.findById(id);
+        OldCourse.setName(course.getName());
+        OldCourse.setCredit(course.getCredit());
+        return courseRepository.save(OldCourse);
     }
 
-    /**
-     * 删除一门课程
-     * @param id
-     */
-    @DeleteMapping("/delete/{id}")
-    public void courseDel(@PathVariable("id")Integer id){
+    // 删除一门课程
+    @DeleteMapping("/delete")
+    @Transactional
+    public void courseDel(@RequestParam("cid") Integer id){
         courseService.deleteCourse(id);
     }
 }

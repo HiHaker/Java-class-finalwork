@@ -20,6 +20,8 @@ public class ElectCourseServiceImpl implements ElectCourseService {
     @Autowired
     ElectCourseRepository electCourseRepository;
     @Autowired
+    StudentService studentService;
+    @Autowired
     CourseService courseService;
 
     @Override
@@ -35,12 +37,22 @@ public class ElectCourseServiceImpl implements ElectCourseService {
 
     @Override
     public List<Student> findStudentsByCid(Integer cid) {
-        return electCourseRepository.findByCid(cid);
+        List<ElectCourse> electCourseList = electCourseRepository.findByCid(cid);
+        List<Student> studentList = new ArrayList<>();
+        for (ElectCourse ec:electCourseList){
+            studentList.add(studentService.findStudentByID(ec.getSid()));
+        }
+        return studentList;
     }
 
     @Override
     public List<Course> findCoursesBySid(Integer sid) {
-        return electCourseRepository.findBySid(sid);
+        List<ElectCourse> electCourseList = electCourseRepository.findBySid(sid);
+        List<Course> courseList = new ArrayList<>();
+        for (ElectCourse ec:electCourseList){
+            courseList.add(courseService.findById(ec.getCid()));
+        }
+        return courseList;
     }
 
     @Override
@@ -52,7 +64,7 @@ public class ElectCourseServiceImpl implements ElectCourseService {
     public List<Course> findRemainCourse(Integer sid) {
         // 找出未选课程列表
         List<Course> courses = courseService.findAllCourse();
-        List<Course> records = electCourseRepository.findBySid(sid);
+        List<Course> records = this.findCoursesBySid(sid);
         List<Course> remains = new ArrayList<>();
         for (Course c:courses){
             if (!records.contains(c)){

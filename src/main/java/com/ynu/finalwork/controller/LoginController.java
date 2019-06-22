@@ -9,6 +9,7 @@ import com.ynu.finalwork.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -37,6 +38,7 @@ public class LoginController {
     // 管理员登录
     @PostMapping("/admin")
     public Object adminLogin(Admin admin){
+        jsonObject = new JSONObject();
         if (adminRepository.findByName(admin.getName()) == null){
             jsonObject.put("message","登陆失败,管理员不存在!");
         }else{
@@ -54,11 +56,14 @@ public class LoginController {
 
     // 学生登录
     @PostMapping("/student")
-    public Object studentLogin(Student student){
-        if (studentService.findStudentByNumber(student.getSnumber()) == null){
+    public Object studentLogin(@RequestParam("snumber") String snumber,
+                               @RequestParam("password") String password){
+        jsonObject = new JSONObject();
+        Student student = studentService.findStudentByNumber(snumber);
+        if (student == null){
             jsonObject.put("message","登陆失败,学生不存在!");
         }else{
-            if (student.getPassword().equals(studentService.findStudentByNumber(student.getSnumber()).getPassword())){
+            if (password.equals(student.getPassword())){
                 jsonObject.put("message","登录成功!");
                 jsonObject.put("records",electCourseService.findCoursesBySid(student.getSid()));
                 jsonObject.put("remains",electCourseService.findRemainCourse(student.getSid()));
@@ -71,11 +76,14 @@ public class LoginController {
 
     // 教师登录
     @PostMapping("/teacher")
-    public Object teacherLogin(Teacher teacher){
-        if (teacherService.findTeacherByNumber(teacher.getTnumber()) == null){
+    public Object teacherLogin(@RequestParam("tnumber") String tnumber,
+                               @RequestParam("password") String password){
+        jsonObject = new JSONObject();
+        Teacher teacher = teacherService.findTeacherByNumber(tnumber);
+        if (teacher == null){
             jsonObject.put("message","登陆失败,教师不存在!");
         }else{
-            if (teacher.getPassword().equals(teacherService.findTeacherByNumber(teacher.getTnumber()).getPassword())){
+            if (password.equals(teacher.getPassword())){
                 jsonObject.put("message","登录成功!");
                 jsonObject.put("records",teachService.findCourseByTid(teacher.getTid()));
                 jsonObject.put("remains",teachService.findRemainCourse(teacher.getTid()));

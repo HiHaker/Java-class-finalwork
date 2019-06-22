@@ -24,11 +24,16 @@ public class Teacher {
 
     private String telephone;
 
+    public Teacher(){
+
+    }
+
     public Teacher(String tnumber, String name, String password, Integer sex, String telephone) {
         this.tnumber = tnumber;
         this.name = name;
         this.password = password;
         this.sex = sex;
+        // telephone可以为空，其他均不能为空
         this.telephone = telephone;
     }
 

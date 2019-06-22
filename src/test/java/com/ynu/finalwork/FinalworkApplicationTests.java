@@ -2,6 +2,7 @@ package com.ynu.finalwork;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -12,5 +13,6 @@ public class FinalworkApplicationTests {
     @Test
     public void contextLoads() {
     }
+
 
 }

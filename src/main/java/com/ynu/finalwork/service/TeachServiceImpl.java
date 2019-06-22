@@ -17,6 +17,8 @@ public class TeachServiceImpl implements TeachService {
     @Autowired
     CourseService courseService;
     @Autowired
+    TeacherService teacherService;
+    @Autowired
     TeachService teachService;
 
     @Override
@@ -37,19 +39,24 @@ public class TeachServiceImpl implements TeachService {
 
     @Override
     public Teacher findTeacherByCid(Integer cid) {
-        return teachRepository.findByCid(cid);
+        return teacherService.findById(teachRepository.findByCid(cid).getTid());
     }
 
     @Override
     public List<Course> findCourseByTid(Integer tid) {
-        return teachRepository.findByTid(tid);
+        List<Teach> teachList = teachRepository.findByTid(tid);
+        List<Course> courseList = new ArrayList<>();
+        for (Teach t:teachList){
+            courseList.add(courseService.findById(t.getCid()));
+        }
+        return courseList;
     }
 
     @Override
     public List<Course> findRemainCourse(Integer tid) {
         // 找出未选课程列表
         List<Course> courses = courseService.findAllCourse();
-        List<Course> records = teachRepository.findByTid(tid);
+        List<Course> records = this.findCourseByTid(tid);
         List<Course> remains = new ArrayList<>();
         for (Course c:courses){
             if (!records.contains(c)){

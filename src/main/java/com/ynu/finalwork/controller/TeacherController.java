@@ -4,6 +4,7 @@ import com.ynu.finalwork.entity.Teacher;
 import com.ynu.finalwork.repository.TeacherRepository;
 import com.ynu.finalwork.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -24,53 +25,33 @@ public class TeacherController {
      * 增加一位老师
      */
     @PostMapping("/add")
-    public Teacher teacherAdd(@RequestParam("name")String name,
-                              @RequestParam("sex")Integer sex,
-                              @RequestParam("telephone")String telephone){
-        Teacher teacher = new Teacher();
-        teacher.setName(name);
-        teacher.setSex(sex);
-        teacher.setTelephone(telephone);
+    public Teacher teacherAdd(Teacher teacher){
         return teacherRepository.save(teacher);
     }
 
-    /**
-     * 查询一位老师
-     * @param id
-     * @return
-     */
-    @GetMapping("/get/{id}")
-    public Teacher teacherGet(@PathVariable("id") Integer id){
-        Teacher teacher = teacherService.findById(id);
+    // 查询一位老师
+    @GetMapping("/get")
+    public Teacher teacherGet(@RequestParam("tnumber") String tno){
+        Teacher teacher = teacherService.findTeacherByNumber(tno);
         return teacher;
     }
 
-    /**
-     * 更新一位教师，通过tid找到更新的教师
-     * @param id
-     * @param name
-     * @param sex
-     * @param telephone
-     */
-     @PutMapping("/update/{id}")
-     public Teacher teacherUpdate(@PathVariable("id")Integer id,
-                                  @RequestParam("name")String name,
-                                  @RequestParam("sex")Integer sex,
-                                  @RequestParam("telephone")String telephone){
-         Teacher teacher = teacherService.findById(id);
-         teacher.setTelephone(telephone);
-         teacher.setSex(sex);
-         teacher.setName(name);
-         return teacherRepository.save(teacher);
+    // 更新一位教师，通过tid找到更新的教师
+     @PutMapping("/update")
+     public Teacher teacherUpdate(@RequestParam("tid") Integer id, Teacher teacher){
+        Teacher t = teacherService.findById(id);
+        t.setTnumber(teacher.getTnumber());
+        t.setName(teacher.getName());
+        t.setPassword(teacher.getPassword());
+        t.setSex(teacher.getSex());
+        t.setTelephone(teacher.getTelephone());
+        return teacherRepository.save(teacher);
      }
 
-    /**
-     * 删除一位老师
-     * @param id
-     */
-
-    @DeleteMapping("/delete/{id}")
-    public void teacherDel(@PathVariable("id")Integer id){
+     // 删除一位老师
+    @DeleteMapping("/delete")
+    @Transactional
+    public void teacherDel(@RequestParam("tid") Integer id){
         teacherService.deleteTeacher(id);
     }
 }
