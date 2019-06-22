@@ -16,10 +16,11 @@ import java.util.Set;
 @Service
 public class CourseServiceImpl implements  CourseService{
     @Autowired
-    private CourseService courseService;
-
+    CourseRepository courseRepository;
     @Autowired
-    private CourseRepository courseRepository;
+    ElectCourseService electCourseService;
+    @Autowired
+    TeachService teachService;
 
     @Override
     public void addCourse(Course course) {
@@ -28,6 +29,8 @@ public class CourseServiceImpl implements  CourseService{
 
     @Override
     public void deleteCourse(Integer id) {
+        electCourseService.deleteRecordByCid(id);
+        teachService.deleteTeachByCid(id);
         courseRepository.deleteById(id);
     }
 

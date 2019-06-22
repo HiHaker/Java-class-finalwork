@@ -13,6 +13,8 @@ import java.util.List;
 public interface ElectCourseService {
     void addRecord(ElectCourse electCourse);
     void deleteRecord(Integer sid, Integer cid);
+    void deleteRecordBySid(Integer sid);
+    void deleteRecordByCid(Integer cid);
     void updateRecord(ElectCourse electCourse);
     List<Student> findStudentsByCid(Integer cid);
     List<Course> findCoursesBySid(Integer sid);

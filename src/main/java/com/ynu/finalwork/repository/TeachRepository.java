@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface TeachRepository extends JpaRepository<Teach, Integer> {
         void deleteByTidAndCid(Integer tid, Integer cid);
+        void deleteByTid(Integer tid);
+        void deleteByCid(Integer cid);
         Teach findByCid(Integer cid);
         List<Teach> findByTid(Integer tid);
 }

@@ -16,6 +16,8 @@ import java.util.List;
 public class TeacherServiceImpl implements TeacherService {
     @Autowired
     private TeacherRepository teacherRepository;
+    @Autowired
+    TeachService teachService;
 
     @Override
     public void addTeacher(Teacher teacher) {
@@ -24,6 +26,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public void deleteTeacher(Integer id) {
+        teachService.findCourseByTid(id);
         teacherRepository.deleteById(id);
     }
 

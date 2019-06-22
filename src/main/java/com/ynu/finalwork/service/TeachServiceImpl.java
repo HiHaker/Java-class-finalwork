@@ -32,6 +32,16 @@ public class TeachServiceImpl implements TeachService {
     }
 
     @Override
+    public void deleteTeachByTid(Integer tid) {
+        teachRepository.deleteByTid(tid);
+    }
+
+    @Override
+    public void deleteTeachByCid(Integer cid) {
+        teachRepository.deleteByCid(cid);
+    }
+
+    @Override
     public void updateTeach(Teach teach) {
         teachRepository.save(teach);
 

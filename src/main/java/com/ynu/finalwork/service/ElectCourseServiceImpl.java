@@ -36,6 +36,16 @@ public class ElectCourseServiceImpl implements ElectCourseService {
     }
 
     @Override
+    public void deleteRecordBySid(Integer sid) {
+        electCourseRepository.deleteBySid(sid);
+    }
+
+    @Override
+    public void deleteRecordByCid(Integer cid) {
+        electCourseRepository.deleteBySid(cid);
+    }
+
+    @Override
     public List<Student> findStudentsByCid(Integer cid) {
         List<ElectCourse> electCourseList = electCourseRepository.findByCid(cid);
         List<Student> studentList = new ArrayList<>();

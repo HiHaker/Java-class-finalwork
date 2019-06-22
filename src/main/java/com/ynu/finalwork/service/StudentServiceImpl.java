@@ -15,6 +15,9 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService{
     @Autowired
     StudentRepository studentRepository;
+    @Autowired
+    ElectCourseService electCourseService;
+
     @Override
     public void addStudent(Student s) {
         studentRepository.save(s);
@@ -22,6 +25,7 @@ public class StudentServiceImpl implements StudentService{
 
     @Override
     public void deleteStudent(Integer sid) {
+        electCourseService.deleteRecordBySid(sid);
         studentRepository.deleteById(sid);
     }
 
