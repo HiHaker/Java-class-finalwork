@@ -14,11 +14,23 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer tid;
 
+    private String tnumber;
+
     private String  name;
+
+    private String password;
 
     private Integer sex;
 
     private String telephone;
+
+    public Teacher(String tnumber, String name, String password, Integer sex, String telephone) {
+        this.tnumber = tnumber;
+        this.name = name;
+        this.password = password;
+        this.sex = sex;
+        this.telephone = telephone;
+    }
 
     public Integer getTid() {
         return tid;
@@ -28,12 +40,28 @@ public class Teacher {
         this.tid = tid;
     }
 
+    public String getTnumber() {
+        return tnumber;
+    }
+
+    public void setTnumber(String tnumber) {
+        this.tnumber = tnumber;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Integer getSex() {

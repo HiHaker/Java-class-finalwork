@@ -11,6 +11,7 @@ import java.util.List;
  * BY hujianlong
  */
 public interface StudentRepository extends JpaRepository<Student, Integer> {
-    Student findByName(String name);
+    List<Student> findByName(String name);
+    Student findBySnumber(String snumber);
     List<Student> findBySex(Integer sex);
 }

@@ -13,7 +13,8 @@ public interface StudentService {
     void deleteStudent(Integer sid);
     void updateStudent(Student s);
     List<Student> findAllStudents();
-    Student findStudentByName(String name);
+    List<Student> findStudentByName(String name);
+    Student findStudentByNumber(String number);
     Student findStudentByID(Integer sid);
     List<Student> findStudentsBySex(Integer sex);
 }

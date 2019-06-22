@@ -29,4 +29,9 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher findById(Integer id) {
         return teacherRepository.findByTid(id);
     }
+
+    @Override
+    public Teacher findTeacherByNumber(String number) {
+        return teacherRepository.findByTnumber(number);
+    }
 }

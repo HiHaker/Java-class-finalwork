@@ -9,5 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 
 public interface TeacherRepository extends JpaRepository<Teacher,Integer> {
-    public Teacher findByTid(Integer id);
+    Teacher findByTid(Integer id);
+    Teacher findByTnumber(String number);
 }

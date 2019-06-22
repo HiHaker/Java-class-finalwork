@@ -11,4 +11,5 @@ public interface TeacherService {
     void addTeacher(Teacher teacher);
     void deleteTeacher(Integer id);
     Teacher findById(Integer id);
+    Teacher findTeacherByNumber(String number);
 }

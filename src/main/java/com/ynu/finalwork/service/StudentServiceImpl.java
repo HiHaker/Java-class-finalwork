@@ -36,8 +36,13 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public Student findStudentByName(String name) {
+    public List<Student> findStudentByName(String name) {
         return studentRepository.findByName(name);
+    }
+
+    @Override
+    public Student findStudentByNumber(String number) {
+        return studentRepository.findBySnumber(number);
     }
 
     @Override

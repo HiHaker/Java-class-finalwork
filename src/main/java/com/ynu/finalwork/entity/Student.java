@@ -12,20 +12,26 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer sid;
-    @Column
+
+    private String snumber;
+
     private String name;
-    @Column
+
+    private String password;
+
     private Integer sex;
-    @Column
+
     private String telephone;
+
 
     public Student(){
 
     }
 
-    public Student(Integer sid, String name, Integer sex, String telephone){
-        this.sid = sid;
+    public Student(String snumber, String name, String password, Integer sex, String telephone){
+        this.snumber = snumber;
         this.name = name;
+        this.password = password;
         this.sex = sex;
         this.telephone = telephone;
     }
@@ -38,12 +44,28 @@ public class Student {
         this.sid = sid;
     }
 
+    public String getSnumber() {
+        return snumber;
+    }
+
+    public void setSnumber(String snumber) {
+        this.snumber = snumber;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Integer getSex() {
@@ -60,5 +82,17 @@ public class Student {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "sid=" + sid +
+                ", snumber='" + snumber + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", sex=" + sex +
+                ", telephone='" + telephone + '\'' +
+                '}';
     }
 }
