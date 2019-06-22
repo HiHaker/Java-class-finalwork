@@ -8,6 +8,7 @@ import com.ynu.finalwork.repository.ElectCourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,8 @@ import java.util.List;
 public class ElectCourseServiceImpl implements ElectCourseService {
     @Autowired
     ElectCourseRepository electCourseRepository;
+    @Autowired
+    CourseService courseService;
 
     @Override
     public void addRecord(ElectCourse ec) {
@@ -43,5 +46,19 @@ public class ElectCourseServiceImpl implements ElectCourseService {
     @Override
     public void updateRecord(ElectCourse ec) {
         electCourseRepository.save(ec);
+    }
+
+    @Override
+    public List<Course> findRemainCourse(Integer sid) {
+        // 找出未选课程列表
+        List<Course> courses = courseService.findAllCourse();
+        List<Course> records = electCourseRepository.findBySid(sid);
+        List<Course> remains = new ArrayList<>();
+        for (Course c:courses){
+            if (!records.contains(c)){
+                remains.add(c);
+            }
+        }
+        return remains;
     }
 }

@@ -5,6 +5,8 @@ import com.ynu.finalwork.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  *create by fukaimi
  * 2019/6/12
@@ -33,5 +35,10 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher findTeacherByNumber(String number) {
         return teacherRepository.findByTnumber(number);
+    }
+
+    @Override
+    public List<Teacher> findAllTeachers() {
+        return teacherRepository.findAll();
     }
 }

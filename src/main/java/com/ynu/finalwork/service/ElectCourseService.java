@@ -16,4 +16,5 @@ public interface ElectCourseService {
     void updateRecord(ElectCourse electCourse);
     List<Student> findStudentsByCid(Integer cid);
     List<Course> findCoursesBySid(Integer sid);
+    List<Course> findRemainCourse(Integer sid);
 }

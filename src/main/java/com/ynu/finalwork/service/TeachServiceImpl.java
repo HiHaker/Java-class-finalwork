@@ -7,13 +7,17 @@ import com.ynu.finalwork.repository.TeachRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class TeachServiceImpl implements TeachService {
-
     @Autowired
     private TeachRepository teachRepository;
+    @Autowired
+    CourseService courseService;
+    @Autowired
+    TeachService teachService;
 
     @Override
     public void addTeach(Teach teach) {
@@ -39,5 +43,19 @@ public class TeachServiceImpl implements TeachService {
     @Override
     public List<Course> findCourseByTid(Integer tid) {
         return teachRepository.findByTid(tid);
+    }
+
+    @Override
+    public List<Course> findRemainCourse(Integer tid) {
+        // 找出未选课程列表
+        List<Course> courses = courseService.findAllCourse();
+        List<Course> records = teachRepository.findByTid(tid);
+        List<Course> remains = new ArrayList<>();
+        for (Course c:courses){
+            if (!records.contains(c)){
+                remains.add(c);
+            }
+        }
+        return remains;
     }
 }

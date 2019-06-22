@@ -43,6 +43,17 @@ public class Course {
         this.credit = credit;
     }
 
+    // 重写比较课程的方法，如果课程号相同，认为相同
+    @Override
+    public boolean equals(Object obj) {
+        Course temp = (Course)obj;
+        if (temp.getCid() == this.cid){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     @Override
     public String toString() {
         return "Course{" +

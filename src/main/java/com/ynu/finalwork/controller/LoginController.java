@@ -5,8 +5,7 @@ import com.ynu.finalwork.entity.Admin;
 import com.ynu.finalwork.entity.Student;
 import com.ynu.finalwork.entity.Teacher;
 import com.ynu.finalwork.repository.AdminRepository;
-import com.ynu.finalwork.service.StudentService;
-import com.ynu.finalwork.service.TeacherService;
+import com.ynu.finalwork.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,14 @@ public class LoginController {
     @Autowired
     StudentService studentService;
     @Autowired
+    CourseService courseService;
+    @Autowired
     TeacherService teacherService;
+    @Autowired
+    ElectCourseService electCourseService;
+    @Autowired
+    TeachService teachService;
+
 
     JSONObject jsonObject;
 
@@ -36,6 +42,9 @@ public class LoginController {
         }else{
             if (admin.getPassword().equals(adminRepository.findByName(admin.getName()).getPassword())){
                 jsonObject.put("message","登录成功!");
+                jsonObject.put("students",studentService.findAllStudents());
+                jsonObject.put("courses",courseService.findAllCourse());
+                jsonObject.put("teachers",teacherService.findAllTeachers());
             }else{
                 jsonObject.put("message","登陆失败,密码错误!");
             }
@@ -51,6 +60,8 @@ public class LoginController {
         }else{
             if (student.getPassword().equals(studentService.findStudentByNumber(student.getSnumber()).getPassword())){
                 jsonObject.put("message","登录成功!");
+                jsonObject.put("records",electCourseService.findCoursesBySid(student.getSid()));
+                jsonObject.put("remains",electCourseService.findRemainCourse(student.getSid()));
             }else{
                 jsonObject.put("message","登陆失败,密码错误!");
             }
@@ -66,6 +77,8 @@ public class LoginController {
         }else{
             if (teacher.getPassword().equals(teacherService.findTeacherByNumber(teacher.getTnumber()).getPassword())){
                 jsonObject.put("message","登录成功!");
+                jsonObject.put("records",teachService.findCourseByTid(teacher.getTid()));
+                jsonObject.put("remains",teachService.findRemainCourse(teacher.getTid()));
             }else{
                 jsonObject.put("message","登陆失败,密码错误!");
             }

@@ -11,4 +11,5 @@ public interface TeachService {
     void updateTeach(Teach teach);
     Teacher findTeacherByCid(Integer cid);
     List<Course> findCourseByTid(Integer tid);
+    List<Course> findRemainCourse(Integer tid);
 }
