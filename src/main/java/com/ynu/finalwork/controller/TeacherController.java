@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/teacher")
+@CrossOrigin
 public class TeacherController {
     @Autowired
     private TeacherRepository teacherRepository;

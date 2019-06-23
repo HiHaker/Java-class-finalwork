@@ -7,10 +7,7 @@ import com.ynu.finalwork.entity.Teacher;
 import com.ynu.finalwork.repository.AdminRepository;
 import com.ynu.finalwork.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created on 2019/6/22 0022
@@ -18,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/login")
+@CrossOrigin
 public class LoginController {
     @Autowired
     AdminRepository adminRepository;

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/course")
+@CrossOrigin
 public class CourseController {
     @Autowired
     private CourseRepository courseRepository;
