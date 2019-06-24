@@ -53,19 +53,24 @@ public class StudentController {
     }
 
     // 修改学生
-    @PostMapping("/updateStudent")
+    @PutMapping("/updateStudent")
     @Transactional
-    public Object updateStudent(@RequestParam("sid") Integer id, Student s){
+    public Object updateStudent(@RequestParam("sid") Integer id,
+                                @RequestParam("snumber") String snumber,
+                                @RequestParam("name") String name,
+                                @RequestParam("password") String password,
+                                @RequestParam("sex") Integer sex,
+                                @RequestParam("telephone") String telephone){
         jsonObject = new JSONObject();
         Student base = studentService.findStudentByID(id);
         if (base == null){
             jsonObject.put("message","更新失败,学生不存在!");
         }else{
-            base.setName(s.getName());
-            base.setPassword(s.getPassword());
-            base.setSex(s.getSex());
-            base.setSnumber(s.getSnumber());
-            base.setTelephone(s.getTelephone());
+            base.setName(name);
+            base.setPassword(password);
+            base.setSex(sex);
+            base.setSnumber(snumber);
+            base.setTelephone(telephone);
             studentService.updateStudent(base);
             jsonObject.put("student",base);
         }

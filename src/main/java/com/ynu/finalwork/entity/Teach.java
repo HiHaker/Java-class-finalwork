@@ -13,6 +13,14 @@ public class Teach {
     @Id
     private Integer cid;
 
+    public Teach(){
+
+    }
+
+    public Teach(Integer tid, Integer cid) {
+        this.tid = tid;
+        this.cid = cid;
+    }
 
     public Integer getTid() {
         return tid;

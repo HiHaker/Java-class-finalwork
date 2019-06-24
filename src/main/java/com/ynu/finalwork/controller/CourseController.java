@@ -41,10 +41,12 @@ public class CourseController {
     // 更新一门课程,通过cid需要更新的课程
     @PutMapping("/update")
     @Transactional
-    public Course courseUpdata(@RequestParam("cid") Integer id, Course course){
+    public Course courseUpdate(@RequestParam("cid") Integer id,
+                               @RequestParam("name") String name,
+                               @RequestParam("credit") Double credit){
         Course OldCourse = courseService.findById(id);
-        OldCourse.setName(course.getName());
-        OldCourse.setCredit(course.getCredit());
+        OldCourse.setName(name);
+        OldCourse.setCredit(credit);
         return courseRepository.save(OldCourse);
     }
 

@@ -39,14 +39,19 @@ public class TeacherController {
 
     // 更新一位教师，通过tid找到更新的教师
      @PutMapping("/update")
-     public Teacher teacherUpdate(@RequestParam("tid") Integer id, Teacher teacher){
+     public Teacher teacherUpdate(@RequestParam("tid") Integer id,
+                                  @RequestParam("tnumber") String tnumber,
+                                  @RequestParam("name") String name,
+                                  @RequestParam("password") String password,
+                                  @RequestParam("sex") Integer sex,
+                                  @RequestParam("telephone") String telephone){
         Teacher t = teacherService.findById(id);
-        t.setTnumber(teacher.getTnumber());
-        t.setName(teacher.getName());
-        t.setPassword(teacher.getPassword());
-        t.setSex(teacher.getSex());
-        t.setTelephone(teacher.getTelephone());
-        return teacherRepository.save(teacher);
+        t.setTnumber(tnumber);
+        t.setName(name);
+        t.setPassword(password);
+        t.setSex(sex);
+        t.setTelephone(telephone);
+        return teacherRepository.save(t);
      }
 
      // 删除一位老师
