@@ -29,8 +29,8 @@ public class TeachController {
     @Transactional
     public Object teachAdd(Teach teach){
         jsonObject = new JSONObject();
-//        若通过cid找到的教师存在，则不能加入
-        if(teachService.findTeacherByCid(teach.getCid())!=null){
+//        若通过cid找到记录，则不能加入
+        if(teachService.findRecordByCid(teach.getCid()) != null){
             jsonObject.put("message","安排失败,已存在课程!");
         }else{
             jsonObject.put("record",teach);

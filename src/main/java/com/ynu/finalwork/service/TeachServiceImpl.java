@@ -48,8 +48,8 @@ public class TeachServiceImpl implements TeachService {
     }
 
     @Override
-    public Teacher findTeacherByCid(Integer cid) {
-        return teacherService.findById(teachRepository.findByCid(cid).getTid());
+    public Teach findRecordByCid(Integer cid) {
+        return teachRepository.findByCid(cid);
     }
 
     @Override

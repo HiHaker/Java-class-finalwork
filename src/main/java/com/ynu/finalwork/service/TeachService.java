@@ -11,7 +11,7 @@ public interface TeachService {
     void deleteTeachByTid(Integer tid);
     void deleteTeachByCid(Integer cid);
     void updateTeach(Teach teach);
-    Teacher findTeacherByCid(Integer cid);
+    Teach findRecordByCid(Integer cid);
     List<Course> findCourseByTid(Integer tid);
     List<Course> findRemainCourse(Integer tid);
 }
