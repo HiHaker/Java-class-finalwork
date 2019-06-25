@@ -38,11 +38,12 @@ public class ElectCourseController {
     @Transactional
     public Object addRecord(ElectCourse ec) {
         jsonObject = new JSONObject();
-        // 每门课程最多容纳10名学生, 每个学生最多选择5门课程
-        if (electCourseService.findStudentsByCid(ec.getCid()).size() >= 10) {
-            jsonObject.put("message", "选课失败,超过课程容量!");
+        if (electCourseService.findRecord(ec.getSid(),ec.getCid()) != null){
+            jsonObject.put("message1","选课失败,已经选过此门课程!");
+        } else if (electCourseService.findStudentsByCid(ec.getCid()).size() >= 10) {
+            jsonObject.put("message2", "选课失败,超过课程容量!");
         } else if (electCourseService.findCoursesBySid(ec.getSid()).size() >= 5) {
-            jsonObject.put("message", "选课失败,超过选课容量!");
+            jsonObject.put("message3", "选课失败,超过选课容量!");
         } else {
             electCourseService.addRecord(ec);
             jsonObject.put("record", ec);

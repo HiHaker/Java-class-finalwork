@@ -71,6 +71,11 @@ public class ElectCourseServiceImpl implements ElectCourseService {
     }
 
     @Override
+    public ElectCourse findRecord(Integer sid, Integer cid) {
+        return electCourseRepository.findBySidAndCid(sid,cid);
+    }
+
+    @Override
     public List<Course> findRemainCourse(Integer sid) {
         // 找出未选课程列表
         List<Course> courses = courseService.findAllCourse();

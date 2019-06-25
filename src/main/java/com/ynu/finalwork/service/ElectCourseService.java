@@ -16,6 +16,7 @@ public interface ElectCourseService {
     void deleteRecordBySid(Integer sid);
     void deleteRecordByCid(Integer cid);
     void updateRecord(ElectCourse electCourse);
+    ElectCourse findRecord(Integer sid, Integer cid);
     List<Student> findStudentsByCid(Integer cid);
     List<Course> findCoursesBySid(Integer sid);
     List<Course> findRemainCourse(Integer sid);

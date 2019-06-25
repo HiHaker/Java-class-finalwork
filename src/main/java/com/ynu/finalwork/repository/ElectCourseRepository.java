@@ -16,6 +16,7 @@ import java.util.List;
 public interface ElectCourseRepository extends JpaRepository<ElectCourse,DoubleKey> {
     List<ElectCourse> findBySid(Integer sid);
     List<ElectCourse> findByCid(Integer cid);
+    ElectCourse findBySidAndCid(Integer sid, Integer cid);
     void deleteBySid(Integer sid);
     void deleteByCid(Integer cid);
 }
